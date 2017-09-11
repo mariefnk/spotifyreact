@@ -1,14 +1,23 @@
 body{
   /*background:#000;*/
-  color: white;
+  /*/color: white;*/
 }
 
 .App{
-  margin-left:5%;
+  margin-left:30%;
 }
 
 .App-title{
   font-size: 26px;
+}
+
+.nav-menu{
+  margin-bottom: 50px;
+  color:'#7bb92f';
+}
+
+.is-active{
+  font-weight: bold;
 }
 
 .artist-info{
@@ -41,6 +50,10 @@ body{
 }
 
 /*Gallery*/
+.gallery{
+  display: inline;
+}
+
 .track{
   width: 180px;
   height: 180px;

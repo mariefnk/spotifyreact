@@ -39,10 +39,10 @@ class Gallery extends Component {
       }
     }
     render(){
-    console.log("tracks", this.props);
     const {tracks} = this.props;
+    console.log("tracks", tracks);
     return (
-      <div>
+      <div className="gallery">
         {tracks.map((track, index) => {
           const trackImg = track.album.images[0].url;
           // new scope so we return again

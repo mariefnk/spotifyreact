@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom';
 import MainApp from './App.jsx';
 import NewReleases from './NewReleases.jsx';
 import Categories from './Categories.jsx';
@@ -14,8 +14,9 @@ injectTapEventPlugin();
 
 const style = {
   height: 100,
-  width: 1100,
-  margin: 20,
+  width: 500,
+  marginLeft: 500,
+  marginTop: 50,
   textAlign: 'center',
   display: 'inline-block',
   backgroundColor: 'black',
@@ -25,6 +26,7 @@ const style = {
  const pageNotFound = () => (
    <CardComponent
      title="Page not found"
+     link={<Link to="/">Back to main page</Link>}
      style={style}
      />
  );
@@ -33,12 +35,15 @@ const style = {
 const routes = (
   <MuiThemeProvider>
     <BrowserRouter>
-      <Switch>
-        <Route path="/" component={MainApp} exact={true}/>
-        <Route path="/newreleases" component={NewReleases}/>
-        <Route path="/categories" component={Categories}/>
-        <Route component={pageNotFound}/>
-      </Switch>
+      <div>
+        <MainApp/>
+          <Switch>
+            <Route path="/" component={MainApp} exact={true}/>
+            <Route path="/newreleases" component={NewReleases}/>
+            <Route path="/categories" component={Categories}/>
+            <Route component={pageNotFound}/>
+          </Switch>
+      </div>
     </BrowserRouter>
   </MuiThemeProvider>
 );

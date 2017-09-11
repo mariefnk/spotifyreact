@@ -7,6 +7,8 @@ const CardComponent = (props) => (
            rounded={false}
            >
            <div>{props.title}</div>
+           <div>{props.link}</div>
+           <div>{props.children}</div>
     </Paper>
 )
 

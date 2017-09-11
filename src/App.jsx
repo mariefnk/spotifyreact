@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import MaterialIcon, {colorPallet} from 'material-icons-react';
+import {BrowserRouter, Route, Switch, NavLink} from 'react-router-dom';
 import './App.css';
 import {FormGroup, FormControl, InputGroup, Glyphicon} from 'react-bootstrap';
 import Artist from './Artist.jsx';
 import Gallery from './Gallery.jsx';
+import CardComponent from './CardComponent.jsx';
 
 
 class App extends Component {
@@ -24,7 +26,7 @@ class App extends Component {
     //ES6 version of BASE_URL + 'q=' + this.state.query + '&type=artist&limit=1';
     let FETCH_URL = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
     const ARTIST_TOP_TRACKS_URL= 'https://api.spotify.com/v1/artists/';
-    var accessToken = 'BQB_0Ywq6n6UnPHu0roHaCQM2ijPt-IBKhsIfTQjTEWkEcKwC9tDd_O4anE3hbALDO1x6gccwOuHC6P1MaQTpcZ171KPeVQhXt4Udu3EIXvcMM1h3SY5iMU2QJjbwyjlukoDSHEczDimJgNpeG_KOf4m_U6PolZHbT4z&refresh_token=AQDDTx2TTW-qPhVkkwf5R_plpWtiGKQFw3eI_3ko1wjVOzuuqlN-4AS9FT0NorUVAZw3atJuHvix6hHulX3h1rST_YrIVdjcD65wxJ85umiY7nkDzSjxXyrden-voHTq5ZI';
+    var accessToken = 'BQD3DuJASMYuHXw04haLGKa5zTd_BpMzQ0Swv74c64OB7VarVzAGWPL9xYKtQLGgWs-530grApAt9DevPScVDLkJbXgVWvRxBD2PrcY9ElCL0yoBvZ9KFCIuhikvHNb061Z7U4B5AhOeKpWZQGbLVcv4KH2tk4L-CylV&refresh_token=AQCsfxDJDnJB3lX-Zdrl6MINlNNP7l9FxxxNHmFwN2a-rCZKHqDFmftmewgmu-qB-IdfJ95jivLrpwCz9g3LOJlpaNL_-EeRiCbtnXRNywO16E-ufMoJrCDlYwi0n11ihDM';
     var params = {
       "url": FETCH_URL,
       "async": true,
@@ -32,7 +34,7 @@ class App extends Component {
       "method": "GET",
       "headers": {
         "accept": "application/json",
-        "authorization": "Bearer BQB_0Ywq6n6UnPHu0roHaCQM2ijPt-IBKhsIfTQjTEWkEcKwC9tDd_O4anE3hbALDO1x6gccwOuHC6P1MaQTpcZ171KPeVQhXt4Udu3EIXvcMM1h3SY5iMU2QJjbwyjlukoDSHEczDimJgNpeG_KOf4m_U6PolZHbT4z&refresh_token=AQDDTx2TTW-qPhVkkwf5R_plpWtiGKQFw3eI_3ko1wjVOzuuqlN-4AS9FT0NorUVAZw3atJuHvix6hHulX3h1rST_YrIVdjcD65wxJ85umiY7nkDzSjxXyrden-voHTq5ZI",
+        "authorization": "Bearer BQD3DuJASMYuHXw04haLGKa5zTd_BpMzQ0Swv74c64OB7VarVzAGWPL9xYKtQLGgWs-530grApAt9DevPScVDLkJbXgVWvRxBD2PrcY9ElCL0yoBvZ9KFCIuhikvHNb061Z7U4B5AhOeKpWZQGbLVcv4KH2tk4L-CylV&refresh_token=AQCsfxDJDnJB3lX-Zdrl6MINlNNP7l9FxxxNHmFwN2a-rCZKHqDFmftmewgmu-qB-IdfJ95jivLrpwCz9g3LOJlpaNL_-EeRiCbtnXRNywO16E-ufMoJrCDlYwi0n11ihDM",
                 }
               }
  // the fetch method in javascript returns a promise. A promise is code returs by a function that represents data that might have availablity now, later or never at all. //then() is a callback that takes an anoynmous arrow function. Need to return response.json() to have the payload of information returned by the API call.
@@ -55,9 +57,25 @@ class App extends Component {
 
 render(){
   console.log("this.state.tracks", this.state.tracks);
+  const style = {
+    position: 'absolute',
+    top:0,
+    left:0,
+    height: '100vh',
+    width: 300,
+    textAlign: 'center',
+    display: 'inline-block',
+    backgroundColor: 'black',
+    color: '#7bb92f',
+  };
   return(
   <div className="App">
+   <CardComponent
+     className="left-nav-menu"
+     style={style}
+     >
    <TextField
+     className="nav-menu"
      hintText="Search"
      inputStyle={{color:"white"}}
      floatingLabelText="Search"
@@ -66,12 +84,24 @@ render(){
      onKeyPress={event => {if(event.key === 'Enter') {this.search()}}}
    />
   <MaterialIcon icon="search" color='#7bb92f'/>
+  <div className="nav-menu">
+    <NavLink to="/newreleases" activeClassName="is-active" exact={true}>
+      NEW RELEASES
+    </NavLink>
+  </div>
+  <div className="nav-menu">
+    <NavLink to="/categories" activeClassName="is-active">
+      CATEGORIES
+    </NavLink>
+  </div>
+  </CardComponent>
   { this.state.artist != null?
     ( <div>
           <Artist
            artist={this.state.artist}
           />
          <Gallery
+           className="gallery"
            tracks ={this.state.tracks}
            />
       </div>
