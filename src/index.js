@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import MainApp from './App.jsx';
 import NewReleases from './NewReleases.jsx';
 import Categories from './Categories.jsx';
-import CardComponent from './CardComponent.jsx'
+import CardComponent from './CardComponent.jsx';
+import ArtistPage from "./ArtistPage";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
@@ -36,13 +36,16 @@ const routes = (
   <MuiThemeProvider>
     <BrowserRouter>
       <div>
-        <MainApp/>
+        <MainApp>
           <Switch>
-            <Route path="/" component={MainApp} exact={true}/>
-            <Route path="/newreleases" component={NewReleases}/>
-            <Route path="/categories" component={Categories}/>
+            <Route path="/search" component={MainApp} exact={true}/>
+            <Route path="/artist/:artistName" component={ArtistPage} exact={true}/>
+            <Route path="/newreleases" component={NewReleases} exact={true}/>
+            <Route path="/categories" component={Categories} exact={true}/>
             <Route component={pageNotFound}/>
           </Switch>
+        </MainApp>
+
       </div>
     </BrowserRouter>
   </MuiThemeProvider>

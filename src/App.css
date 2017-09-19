@@ -119,3 +119,8 @@ body{
     opactiy: 0.8;
   }
 }
+
+/*Search*/
+.searchResult{
+  margin-left: 50%;
+}

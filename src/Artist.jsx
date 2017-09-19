@@ -3,8 +3,11 @@ import './App.css';
 
 class Artist extends Component {
   render(){
-    console.log("prop", this.props);
-    var artist = {name: '', followers: {total: ''}, images: [{url: ''}], genres: []};
+    var artist = {name: '',
+                  followers: {total: ''},
+                  images: [{url: ''}],
+                  genres: []
+                  };
     artist = this.props.artist !==null? this.props.artist: artist;
 
     return (
